@@ -3,8 +3,12 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "author": "Hemant Bhandari",
+  "description": "Electron app using react",
+  "main": "src/electron/main.mjs",
   "scripts": {
-    "dev": "vite",
+    "dev:react": "vite",
+    "dev:electron": "electron .",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
