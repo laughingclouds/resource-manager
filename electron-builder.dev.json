@@ -1,0 +1,20 @@
+{
+    "appId": "com.b-hemant.electron-app",
+    "files": [
+        "dist-react",
+        "src/electron"
+    ],
+    "icon": "desktopIcon.png",
+    "compression": "store",
+    "win": {
+        "target": [
+            {
+                "target": "portable",
+                "arch": [
+                    "x64"
+                ]
+            }
+        ]
+    },
+    "electronLanguages": "en-US"
+}
