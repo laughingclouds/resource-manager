@@ -86,15 +86,14 @@ function getCPUInfo(callback) {
     let total = 0;
 
     for (const cpu of cpus) {
-        user += cpus[cpu].times.user;
-        nice += cpus[cpu].times.nice;
-        sys += cpus[cpu].times.sys;
-        irq += cpus[cpu].times.irq;
-        idle += cpus[cpu].times.idle;
+        user += cpu.times.user;
+        nice += cpu.times.nice;
+        sys += cpu.times.sys;
+        irq += cpu.times.irq;
+        idle += cpu.times.idle;
     }
 
     total = user + nice + sys + idle + irq;
-
     return {
         'idle': idle,
         'total': total
