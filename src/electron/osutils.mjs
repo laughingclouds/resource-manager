@@ -1,23 +1,53 @@
+/**
+ * Code copied from: https://github.com/oscmejia/os-utils
+ * 
+ * License:
+
+(The MIT License)
+
+Copyright (c) 2012 Oscar Mejia <osmejia@vovsolutions.com>
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
+
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+*/
+
 import os from 'os';
 
 /**
  * Apply callback on `% cpu free` value
- * @param {*} callback 
+ * @param {function(number)} callback 
  */
-exports.cpuFree = function(callback) {
+export function cpuFree(callback) {
     getCPUUsage(callback, true);
 }
 
 /**
  * Apply callback on `% cpu used` value
- * @param {function} callback 
+ * @param {function(number)} callback 
  */
-exports.cpuUsage = function(callback) {
+export function cpuUsage(callback) {
     getCPUUsage(callback, false);
 }
 
 /**
- * @param {function} callback function to apply on either `perc` or `(1 - perc)`
+ * @param {function(number)} callback function to apply on either `perc` or `(1 - perc)`
  * @param {boolean} free if true use `perc` else use `(1 - perc)`
  */
 function getCPUUsage(callback, free) {
