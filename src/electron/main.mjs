@@ -1,6 +1,7 @@
 import { app, BrowserWindow } from 'electron';
 import path from 'path';
 import { isDev } from './util.mjs';
+import { pollResources } from './ResourceManager.mjs';
 
 
 const createWindow = () => {
@@ -14,6 +15,8 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     createWindow();
+
+    pollResources();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
