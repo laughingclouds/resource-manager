@@ -1,7 +1,9 @@
 /**
  * Code copied from: https://github.com/oscmejia/os-utils
  * 
- * License:
+ * Slight changes were made to the original code as I saw fit.
+ * 
+ * (For the original source code) License:
 
 (The MIT License)
 
