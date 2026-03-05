@@ -33,6 +33,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 import os from 'os';
 
 /**
+ * The % of free system memory
+ * @returns {number}
+ */
+export function freemempercentage() {
+    return os.freemem() / os.totalmem();
+}
+
+/**
  * Apply callback on `% cpu free` value
  * @param {function(number)} callback 
  */
