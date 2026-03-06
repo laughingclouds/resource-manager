@@ -10,7 +10,9 @@ const __dirname = path.dirname(__filename);
 
 
 const createWindow = () => {
-    const mainWindow = new BrowserWindow({});
+    const mainWindow = new BrowserWindow({
+        icon: path.join(__dirname, "../../desktopIcon.png")
+    });
     if (isDev()) {
         mainWindow.loadURL("http://localhost:5123");
     } else {
