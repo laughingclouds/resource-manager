@@ -2,7 +2,7 @@
     "appId": "com.b-hemant.electron-app",
     "files": [
         "dist-react",
-        "src/electron"
+        "dist-electron"
     ],
     "extraResources": [
         "dist-electron/preload.cjs"
