@@ -32,6 +32,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 import os from 'os';
 
+/** Total memory in Mega Bytes */
+export function totalmem() {
+    return os.totalmem() / (1024 * 1024);
+}
+
 /**
  * The % of free system memory
  * @returns {number}
