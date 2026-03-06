@@ -45,27 +45,23 @@ export function freemempercentage() {
     return os.freemem() / os.totalmem();
 }
 
-/**
- * Apply callback on `% cpu free` value
- * @param {function(number)} callback 
+/** Apply callback on `% cpu free` value
  */
-export function cpuFree(callback) {
+export function cpuFree(callback: (perc: number) => void) {
     getCPUUsage(callback, true);
 }
 
-/**
- * Apply callback on `% cpu used` value
- * @param {function(number)} callback 
+/** Apply callback on `% cpu used` value
  */
-export function cpuUsage(callback) {
+export function cpuUsage(callback: (perc: number) => void) {
     getCPUUsage(callback, false);
 }
 
 /**
- * @param {function(number)} callback function to apply on either `perc` or `(1 - perc)`
- * @param {boolean} free if true use `perc` else use `(1 - perc)`
+ * @param callback function to apply on either `perc` or `(1 - perc)`
+ * @param free if true use `perc` else use `(1 - perc)`
  */
-function getCPUUsage(callback, free) {
+function getCPUUsage(callback: (perc: number) => void, free: boolean) {
     /*
     * If free === true | (perc) is % cpu free
     * If free === false | (1 - perc) is % cpu used
@@ -90,7 +86,7 @@ function getCPUUsage(callback, free) {
     }, 1000);
 }
 
-function getCPUInfo(callback) {
+function getCPUInfo() {
     const cpus = os.cpus();
 
     let user = 0;

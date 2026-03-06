@@ -1,14 +1,12 @@
 import fs from 'fs';
 import os from 'os';
-import * as osUtils from "./osutils.mjs";
+import * as osUtils from "./osutils.js";
+import { BrowserWindow } from 'electron';
 
 
 const POLLING_INTERVAL = 500; // in ms
 
-/**
- * @param {import('electron').BrowserWindow} mainWindow 
- */
-export function pollResources(mainWindow) {
+export function pollResources(mainWindow: BrowserWindow) {
     setInterval(async () => {
         const cpuUsage = await getCpuUsage();
         const ramUsage = getRamUsage();

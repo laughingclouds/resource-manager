@@ -4,6 +4,9 @@
         "dist-react",
         "src/electron"
     ],
+    "extraResources": [
+        "dist-electron/preload.cjs"
+    ],
     "icon": "desktopIcon.png",
     "compression": "store",
     "win": {

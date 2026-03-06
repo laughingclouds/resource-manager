@@ -1,8 +1,9 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
-import { isDev } from './util.mjs';
-import { getStaticData, pollResources } from './ResourceManager.mjs';
+import { isDev } from './util.js';
+import { getStaticData, pollResources } from './ResourceManager.js';
 import { fileURLToPath } from 'url';
+import { getPreloadPath } from './pathResolver.js';
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -11,9 +12,9 @@ const __dirname = path.dirname(__filename);
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
-        icon: path.join(__dirname, "../../desktopIcon.png"),
+        icon: path.join(app.getAppPath(), "desktopIcon.png"),
         webPreferences: {
-            preload: path.join(__dirname, "preload.cjs")
+            preload: getPreloadPath()
         }
     });
     if (isDev()) {
