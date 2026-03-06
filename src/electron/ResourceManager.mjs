@@ -5,12 +5,19 @@ import * as osUtils from "./osutils.mjs";
 
 const POLLING_INTERVAL = 500; // in ms
 
-export function pollResources() {
+/**
+ * @param {import('electron').BrowserWindow} mainWindow 
+ */
+export function pollResources(mainWindow) {
     setInterval(async () => {
         const cpuUsage = await getCpuUsage();
         const ramUsage = getRamUsage();
         const storageData = getStorageData();
-        console.log({cpuUsage, ramUsage, storageUsage: storageData.usage});
+        mainWindow.webContents.send("statistics", {
+            cpuUsage,
+            ramUsage,
+            storageUsage: storageData.usage
+        });
     }, POLLING_INTERVAL);
 }
 

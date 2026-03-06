@@ -1,7 +1,7 @@
-import { app, BrowserWindow } from 'electron';
+import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'path';
 import { isDev } from './util.mjs';
-import { pollResources } from './ResourceManager.mjs';
+import { getStaticData, pollResources } from './ResourceManager.mjs';
 import { fileURLToPath } from 'url';
 
 
@@ -11,19 +11,28 @@ const __dirname = path.dirname(__filename);
 
 const createWindow = () => {
     const mainWindow = new BrowserWindow({
-        icon: path.join(__dirname, "../../desktopIcon.png")
+        icon: path.join(__dirname, "../../desktopIcon.png"),
+        webPreferences: {
+            preload: path.join(__dirname, "preload.cjs")
+        }
     });
     if (isDev()) {
         mainWindow.loadURL("http://localhost:5123");
     } else {
         mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
     }
+
+    return mainWindow;
 }
 
 app.whenReady().then(() => {
-    createWindow();
+    const mainWindow = createWindow();
 
-    pollResources();
+    pollResources(mainWindow);
+
+    ipcMain.handle("getStaticData", () => {
+        return getStaticData();
+    });
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) createWindow()
