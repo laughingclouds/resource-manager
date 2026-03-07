@@ -34,7 +34,7 @@ import os from "os";
 
 /** Total memory in Mega Bytes */
 export function totalmem() {
-	return os.totalmem() / (1024 * 1024);
+  return os.totalmem() / (1024 * 1024);
 }
 
 /**
@@ -42,19 +42,19 @@ export function totalmem() {
  * @returns {number}
  */
 export function freemempercentage() {
-	return os.freemem() / os.totalmem();
+  return os.freemem() / os.totalmem();
 }
 
 /** Apply callback on `% cpu free` value
  */
 export function cpuFree(callback: (perc: number) => void) {
-	getCPUUsage(callback, true);
+  getCPUUsage(callback, true);
 }
 
 /** Apply callback on `% cpu used` value
  */
 export function cpuUsage(callback: (perc: number) => void) {
-	getCPUUsage(callback, false);
+  getCPUUsage(callback, false);
 }
 
 /**
@@ -62,49 +62,49 @@ export function cpuUsage(callback: (perc: number) => void) {
  * @param free if true use `perc` else use `(1 - perc)`
  */
 function getCPUUsage(callback: (perc: number) => void, free: boolean) {
-	/*
-	 * If free === true | (perc) is % cpu free
-	 * If free === false | (1 - perc) is % cpu used
-	 */
-	const stats1 = getCPUInfo();
-	const startIdle = stats1.idle;
-	const startTotal = stats1.total;
+  /*
+   * If free === true | (perc) is % cpu free
+   * If free === false | (1 - perc) is % cpu used
+   */
+  const stats1 = getCPUInfo();
+  const startIdle = stats1.idle;
+  const startTotal = stats1.total;
 
-	setTimeout(function () {
-		const stats2 = getCPUInfo();
-		const endIdle = stats2.idle;
-		const endTotal = stats2.total;
+  setTimeout(function () {
+    const stats2 = getCPUInfo();
+    const endIdle = stats2.idle;
+    const endTotal = stats2.total;
 
-		const idle = endIdle - startIdle;
-		const total = endTotal - startTotal;
-		const perc = idle / total;
+    const idle = endIdle - startIdle;
+    const total = endTotal - startTotal;
+    const perc = idle / total;
 
-		if (free === true) callback(perc);
-		else callback(1 - perc);
-	}, 1000);
+    if (free === true) callback(perc);
+    else callback(1 - perc);
+  }, 1000);
 }
 
 function getCPUInfo() {
-	const cpus = os.cpus();
+  const cpus = os.cpus();
 
-	let user = 0;
-	let nice = 0;
-	let sys = 0;
-	let idle = 0;
-	let irq = 0;
-	let total = 0;
+  let user = 0;
+  let nice = 0;
+  let sys = 0;
+  let idle = 0;
+  let irq = 0;
+  let total = 0;
 
-	for (const cpu of cpus) {
-		user += cpu.times.user;
-		nice += cpu.times.nice;
-		sys += cpu.times.sys;
-		irq += cpu.times.irq;
-		idle += cpu.times.idle;
-	}
+  for (const cpu of cpus) {
+    user += cpu.times.user;
+    nice += cpu.times.nice;
+    sys += cpu.times.sys;
+    irq += cpu.times.irq;
+    idle += cpu.times.idle;
+  }
 
-	total = user + nice + sys + idle + irq;
-	return {
-		idle: idle,
-		total: total,
-	};
+  total = user + nice + sys + idle + irq;
+  return {
+    idle: idle,
+    total: total,
+  };
 }
