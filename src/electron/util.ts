@@ -1,7 +1,7 @@
 // isDev returns true if development environment, false otherwise
 // import { loadEnvFile } from 'process';
 
-import { ipcMain } from "electron";
+import { ipcMain, WebContents } from "electron";
 
 export function isDev() {
   // TODO: make it so the env is loaded on its own
@@ -16,4 +16,12 @@ export function ipcHandle<Key extends keyof EventPayloadMapping>(
   handler: () => EventPayloadMapping[Key],
 ) {
   ipcMain.handle(key, () => handler());
+}
+
+export function ipcWebContentsSend<Key extends keyof EventPayloadMapping>(
+  key: Key,
+  webContents: WebContents,
+  payload: EventPayloadMapping[Key],
+) {
+  webContents.send(key, payload);
 }
