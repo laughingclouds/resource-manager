@@ -1,4 +1,5 @@
-const electron = require("electron");
+const electron: typeof import("electron") = require("electron");
+
 
 electron.contextBridge.exposeInMainWorld("electron", {
   subscribeStatistics: (callback) => {
@@ -8,3 +9,9 @@ electron.contextBridge.exposeInMainWorld("electron", {
   },
   getStaticData: () => electron.ipcRenderer.invoke("getStaticData"),
 } satisfies Window["electron"]);
+
+function ipcInvoke<Key extends keyof EventPayloadMapping>(
+  key: Key,
+): Promise<EventPayloadMapping[Key]> {
+  return electron.ipcRenderer.invoke("");
+}
