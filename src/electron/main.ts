@@ -3,7 +3,7 @@ import path from "path";
 import { ipcHandle, isDev } from "./util.js";
 import { getStaticData, pollResources } from "./ResourceManager.js";
 import { fileURLToPath } from "url";
-import { getPreloadPath } from "./pathResolver.js";
+import { getPreloadPath, getUIPath } from "./pathResolver.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -18,9 +18,7 @@ const createWindow = () => {
 	if (isDev()) {
 		mainWindow.loadURL("http://localhost:5123");
 	} else {
-		mainWindow.loadFile(
-			path.join(app.getAppPath(), "/dist-react/index.html"),
-		);
+		mainWindow.loadFile(getUIPath());
 	}
 
 	return mainWindow;
